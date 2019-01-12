@@ -3,11 +3,11 @@ import React from 'react';
 const Rank = () => {
     return (
         <div>
-            <div>
-                <p>KS, your rank is...</p>
+            <div className='white f3'>
+                KS, your rank is...
             </div>
-            <div>
-                <p>#1</p>
+            <div className='white f1 ma0'>
+                #1
             </div>
         </div>
     );
