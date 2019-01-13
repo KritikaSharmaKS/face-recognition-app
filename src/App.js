@@ -5,7 +5,11 @@ import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import Particles from 'react-particles-js';
+import Clarifai from 'clarifai';
 
+
+ // Instantiate a new Clarifai app by passing in your API key.
+const app = new Clarifai.App({apiKey: 'f25a16fb782a48a397cdca16d0574832'});
 
 const particlesOptions = {
   particles: {
@@ -33,6 +37,14 @@ class App extends Component {
 
   OnButtonSubmit = () => {
     console.log("click");
+    // Predict the contents of an image by passing in a URL.
+    app.models.predict(Clarifai.GENERAL_MODEL, 'https://samples.clarifai.com/metro-north.jpg')
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
