@@ -4,6 +4,7 @@ import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
+import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
 
@@ -27,18 +28,19 @@ class App extends Component {
   constructor(){
 		super();
 		this.state = {
-			input: ''
+      input: '',
+      imageUrl: ''
 		}
   }
   
   onInputChange = (event) => {
-    console.log(event.target.value);
+    this.setState({input: event.target.value});
   }
 
   OnButtonSubmit = () => {
-    console.log("click");
+    this.setState({imageUrl: this.state.input})
     // Predict the contents of an image by passing in a URL.
-    app.models.predict(Clarifai.GENERAL_MODEL, 'https://samples.clarifai.com/metro-north.jpg')
+    app.models.predict(Clarifai.COLOR_MODEL, this.state.input)
       .then(response => {
         console.log(response);
       })
@@ -57,7 +59,7 @@ class App extends Component {
         <Logo />
         <Rank />
         <ImageLinkForm onInputChange={this.onInputChange} OnButtonSubmit={this.OnButtonSubmit}/>
-        {/*<FaceRecognition /> */}
+        <FaceRecognition imageUrl={this.state.imageUrl}/> 
       </div>
     );
   }
