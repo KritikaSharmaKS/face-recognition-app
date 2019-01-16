@@ -3,6 +3,7 @@ import './App.css';
 import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import SignIn from './components/SignIn/SignIn';
+import Register from './components/Register/Register';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
@@ -82,14 +83,17 @@ class App extends Component {
         />
         <Navigation OnRouteChange={this.OnRouteChange}/>
         {
-          this.state.route === 'signin' 
-          ? <SignIn OnRouteChange={this.OnRouteChange}/>
-          : <div>
+          this.state.route === 'home' 
+          ? <div>
               <Logo />
               <Rank />
               <ImageLinkForm onInputChange={this.onInputChange} OnButtonSubmit={this.OnButtonSubmit}/>
               <FaceRecognition imageUrl={this.state.imageUrl} box={this.state.box}/> 
-            </div>  
+            </div> 
+          : (this.state.route === 'signin' 
+            ? <SignIn OnRouteChange={this.OnRouteChange}/>
+            : <Register OnRouteChange={this.OnRouteChange}/>
+            )  
         }
       </div>
     );
