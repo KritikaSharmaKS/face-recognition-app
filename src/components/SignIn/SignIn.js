@@ -24,9 +24,11 @@ class SignIn extends React.Component {
             })
         })//post request
         .then(response => response.json())
-        .then(data => {
-            if(data === 'success')
+        .then(user => {
+            if(user.id){
+                this.props.loadUser(user);
                 this.props.OnRouteChange('home');
+            }
         });      
     }
 
